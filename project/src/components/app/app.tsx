@@ -1,11 +1,36 @@
 import MainPage from '../../pages/main-page/main-page';
-import {ReactNode} from 'react';
+import { ReactFragment } from 'react';
+import { AppRoute } from '../../const';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import NotFoundPage from '../../pages/not-found-page/not-found-page';
+import PropertyPage from '../../pages/property-page/property-page';
+import LoginPage from '../../pages/login-page/login-page';
+import Header from '../header/header';
 
-function App(props: {children?: ReactNode}): JSX.Element {
+function App(props: {children?: ReactFragment}): JSX.Element {
   return (
-    <MainPage>
-      {props.children}
-    </MainPage>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Header />}>
+          <Route index
+            path={AppRoute.Main}
+            element={<MainPage placesList={props.children} />}
+          />
+          <Route
+            path={`${AppRoute.Room}/:id`}
+            element={<PropertyPage />}
+          />
+          <Route
+            path={AppRoute.Login}
+            element={<LoginPage />}
+          />
+          <Route
+            path="*"
+            element={<NotFoundPage />}
+          />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
