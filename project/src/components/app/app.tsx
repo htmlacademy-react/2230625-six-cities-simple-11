@@ -1,20 +1,32 @@
 import MainPage from '../../pages/main-page/main-page';
-import { ReactFragment } from 'react';
 import { AppRoute } from '../../const';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PropertyPage from '../../pages/property-page/property-page';
 import LoginPage from '../../pages/login-page/login-page';
 import Header from '../header/header';
+import {PlaceCardList} from '../../types/place-card-type';
+import {LocationList} from '../../types/locationType';
 
-function App(props: {children?: ReactFragment}): JSX.Element {
+
+type AppScreenProps = {
+  placeCardList: PlaceCardList;
+  locationList: LocationList;
+}
+
+function App({placeCardList, locationList}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Header />}>
           <Route index
             path={AppRoute.Main}
-            element={<MainPage placesList={props.children} />}
+            element={
+              <MainPage
+                placeCardList={placeCardList}
+                locationList={locationList}
+              />
+            }
           />
           <Route
             path={`${AppRoute.Room}/:id`}
