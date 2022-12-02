@@ -1,13 +1,15 @@
-import {PlaceCardList} from '../types/place-card-type';
+import {PlaceCardList, PlaceCardType} from '../types/place-card-type';
 import PlaceCard from '../components/place-card/place-card';
 import {useState} from 'react';
+import Map from "../components/map/map";
+import {Amsterdam} from "../mocks/locations";
 
 type PlacesContainerProps = {
   placeCardList: PlaceCardList;
 }
 
 function PlacesContainer({placeCardList} : PlacesContainerProps) {
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState<PlaceCardType>(placeCardList[0]);
 
   return (
     <div className="cities__places-container container">
@@ -30,11 +32,11 @@ function PlacesContainer({placeCardList} : PlacesContainerProps) {
           </ul>
         </form>
         <div className="cities__places-list places__list tabs__content">
-          {placeCardList.map((item) => <PlaceCard placeCard={item} onMouseOverCallback={() => setActive(item.id)}/>)}
+          {placeCardList.map((item) => <PlaceCard placeCard={item} onMouseEnterCallback={() => setActive(item)}/>)}
         </div>
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map"></section>
+        <Map city={Amsterdam} placeCardList={placeCardList} selectedPlaceCard={active} />
       </div>
     </div>
   );

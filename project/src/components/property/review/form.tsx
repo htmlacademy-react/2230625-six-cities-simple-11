@@ -1,13 +1,21 @@
 import {PropertyReviewFormRating} from './rating';
 
 import {Review} from '../../../types/place-card-type';
-import {useState} from 'react';
+import {FormEvent, useRef, useState} from 'react';
 
 export function PropertyReviewForm() {
+  const inputRef = useRef(null);
   const [review, setReview] = useState<Review>({rating: 0, review: '', time: new Date().toDateString()});
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (inputRef) {
+      // eslint-disable-next-line no-console
+      console.log(new FormData(inputRef?.current || undefined));
+    }
+  };
 
   return (
-    <form className="reviews__form form" action= "/#" method="post">
+    <form className="reviews__form form" action= "/#" method="post" ref={inputRef} onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <PropertyReviewFormRating
         ratingCallback={(name, value) => setReview({...review, [name]: value})}
