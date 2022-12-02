@@ -9,142 +9,37 @@ import {PropertyInside} from '../../components/property/inside';
 import NotFoundPage from '../not-found-page/not-found-page';
 import {PropertyHost} from '../../components/property/host';
 import {PropertyReviews} from '../../components/property/reviews';
+import {PropertyGallery} from '../../components/property/galery';
+import {PropertyNearPlaces} from '../../components/property/near-places';
 
 function PropertyPage(): JSX.Element {
   const params = useParams();
   const placeCard = placeCardList.find((item) => item.id === params.id);
 
-  if (placeCard === undefined) {
-    return <NotFoundPage />;
-  }
-
   return (
-    <main className="page__main page__main--property">
-      <section className="property">
-        <div className="property__gallery-container container">
-          <div className="property__gallery">
-            <div className="property__image-wrapper">
-              <img className="property__image" src={'img/room.jpg'} alt="Studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-01.jpg" alt="Studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-02.jpg" alt="Studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-03.jpg" alt="Studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/studio-01.jpg" alt="Studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-01.jpg" alt="Studio" />
+    placeCard === undefined
+      ? <NotFoundPage />
+      : <main className="page__main page__main--property">
+        <section className="property">
+          <PropertyGallery />
+          <div className="property__container container">
+            <div className="property__wrapper">
+              {placeCard.isPremium && <PropertyMark mark={'Premium'} />}
+              <PropertyName name={placeCard.name} />
+              <PropertyRating ratingStars={placeCard.ratingStars} ratingValue={placeCard.ratingValue} />
+              <PropertyFutures futures={placeCard.futures} />
+              <PropertyPrice price={placeCard.price} />
+              <PropertyInside inside={placeCard.inside} />
+              <PropertyHost />
+              <PropertyReviews />
             </div>
           </div>
-        </div>
-        <div className="property__container container">
-          <div className="property__wrapper">
-            {placeCard.isPremium && <PropertyMark mark={'Premium'} />}
-            <PropertyName name={placeCard.name} />
-            <PropertyRating ratingStars={placeCard.ratingStars} ratingValue={placeCard.ratingValue} />
-            <PropertyFutures futures={placeCard.futures} />
-            <PropertyPrice price={placeCard.price} />
-            <PropertyInside inside={placeCard.inside} />
-            <PropertyHost />
-            <PropertyReviews />
-          </div>
-        </div>
-        <section className="property__map map"></section>
-      </section>
-      <div className="container">
-        <section className="near-places places">
-          <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <div className="near-places__list places__list">
-            <article className="near-places__card place-card">
-              <div className="near-places__image-wrapper place-card__image-wrapper">
-                <a href= "/#">
-                  <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place card" />
-                </a>
-              </div>
-              <div className="place-card__info">
-                <div className="place-card__price-wrapper">
-                  <div className="place-card__price">
-                    <b className="place-card__price-value">&euro;80</b>
-                    <span className="place-card__price-text">&#47;&nbsp;night</span>
-                  </div>
-                </div>
-                <div className="place-card__rating rating">
-                  <div className="place-card__stars rating__stars">
-                    <span style={{ width: '80%' }}></span>
-                    <span className="visually-hidden">Rating</span>
-                  </div>
-                </div>
-                <h2 className="place-card__name">
-                  <a href= "/#">Wood and stone place</a>
-                </h2>
-                <p className="place-card__type">Private room</p>
-              </div>
-            </article>
-
-            <article className="near-places__card place-card">
-              <div className="near-places__image-wrapper place-card__image-wrapper">
-                <a href= "/#">
-                  <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place card" />
-                </a>
-              </div>
-              <div className="place-card__info">
-                <div className="place-card__price-wrapper">
-                  <div className="place-card__price">
-                    <b className="place-card__price-value">&euro;132</b>
-                    <span className="place-card__price-text">&#47;&nbsp;night</span>
-                  </div>
-                </div>
-                <div className="place-card__rating rating">
-                  <div className="place-card__stars rating__stars">
-                    <span style={{ width: '80%' }}></span>
-                    <span className="visually-hidden">Rating</span>
-                  </div>
-                </div>
-                <h2 className="place-card__name">
-                  <a href= "/#">Canal View Prinsengracht</a>
-                </h2>
-                <p className="place-card__type">Apartment</p>
-              </div>
-            </article>
-
-            <article className="near-places__card place-card">
-              <div className="place-card__mark">
-                <span>Premium</span>
-              </div>
-              <div className="near-places__image-wrapper place-card__image-wrapper">
-                <a href= "/#">
-                  <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place card" />
-                </a>
-              </div>
-              <div className="place-card__info">
-                <div className="place-card__price-wrapper">
-                  <div className="place-card__price">
-                    <b className="place-card__price-value">&euro;180</b>
-                    <span className="place-card__price-text">&#47;&nbsp;night</span>
-                  </div>
-                </div>
-                <div className="place-card__rating rating">
-                  <div className="place-card__stars rating__stars">
-                    <span style={{ width: '80%' }}></span>
-                    <span className="visually-hidden">Rating</span>
-                  </div>
-                </div>
-                <h2 className="place-card__name">
-                  <a href= "/#">Nice, cozy, warm big bed apartment</a>
-                </h2>
-                <p className="place-card__type">Apartment</p>
-              </div>
-            </article>
-          </div>
+          <section className="property__map map"></section>
         </section>
-      </div>
-    </main>
+        <div className="container">
+          <PropertyNearPlaces />
+        </div>
+      </main>
   );
 }
 

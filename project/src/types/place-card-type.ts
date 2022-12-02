@@ -1,3 +1,5 @@
+import {LocationType} from "./locationType";
+
 export enum PlaceType {
   Apartment = 'Apartment',
   Private = 'Private room'
@@ -23,6 +25,11 @@ export type Price = {
   text: string;
 }
 
+export type Point = {
+  lat: number;
+  lng: number;
+}
+
 export type PlaceCardType = {
   id: string;
   image: string;
@@ -34,6 +41,8 @@ export type PlaceCardType = {
   isPremium?: boolean;
   inside: string[];
   reviews?: Review[];
+  city: LocationType;
+  point: Point;
 }
 
 export type PlaceCardList = PlaceCardType[];

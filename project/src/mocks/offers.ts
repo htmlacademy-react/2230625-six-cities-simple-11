@@ -1,9 +1,10 @@
 import {PlaceCardList, PlaceType} from '../types/place-card-type';
+import {Amsterdam} from "./locations";
 
 const insidePlace = ['Wi-Fi', 'Washing machine', 'Towels', 'Heating', 'Coffee machine', 'Baby seat', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'];
 export const placeCardList: PlaceCardList = [
   {
-    id: '1',
+    id: '0',
     image: 'img/apartment-01.jpg',
     price: {
       value: 120,
@@ -19,9 +20,13 @@ export const placeCardList: PlaceCardList = [
     },
     isPremium: true,
     inside: insidePlace,
+    city: Amsterdam,
+    point: {
+      lat: 52.3909553943508, lng: 4.85309666406198
+    },
   },
   {
-    id: '2',
+    id: '1',
     image: 'img/room.jpg',
     price: {
       value: 80,
@@ -37,9 +42,13 @@ export const placeCardList: PlaceCardList = [
     },
     isPremium: false,
     inside: insidePlace,
+    city: Amsterdam,
+    point: {
+      lat: 52.3609553943508, lng: 4.85309666406198
+    }
   },
   {
-    id: '3',
+    id: '2',
     image: 'img/apartment-02.jpg',
     price: {
       value: 132,
@@ -55,9 +64,13 @@ export const placeCardList: PlaceCardList = [
     },
     isPremium: false,
     inside: insidePlace,
+    city: Amsterdam,
+    point: {
+      lat: 52.3909553943508, lng: 4.929309666406198
+    }
   },
   {
-    id: '4',
+    id: '3',
     image: 'img/apartment-03.jpg',
     price: {
       value: 180,
@@ -73,9 +86,13 @@ export const placeCardList: PlaceCardList = [
     },
     isPremium: true,
     inside: insidePlace,
+    city: Amsterdam,
+    point: {
+      lat: 52.3809553943508, lng: 4.939309666406198
+    }
   },
   {
-    id: '5',
+    id: '4',
     image: 'img/room.jpg',
     price: {
       value: 80,
@@ -91,5 +108,9 @@ export const placeCardList: PlaceCardList = [
     },
     isPremium: false,
     inside: insidePlace,
+    city: Amsterdam,
+    point: {
+      lat: 52.3609553943508, lng: 4.85309666406198
+    }
   },
 ];

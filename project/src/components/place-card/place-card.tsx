@@ -4,12 +4,12 @@ import {AppRoute} from '../../const';
 
 type PlaceCardProps = {
   placeCard: PlaceCardType;
-  onMouseOverCallback: () => void;
+  onMouseEnterCallback: () => void;
 }
 
-function PlaceCard({placeCard, onMouseOverCallback}: PlaceCardProps) : JSX.Element {
+function PlaceCard({placeCard, onMouseEnterCallback}: PlaceCardProps) : JSX.Element {
   return (
-    <article className="cities__card place-card" onMouseOver={onMouseOverCallback}>
+    <article className="cities__card place-card" onMouseEnter={onMouseEnterCallback}>
       {placeCard.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
