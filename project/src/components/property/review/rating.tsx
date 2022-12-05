@@ -1,4 +1,4 @@
-import {RatingStars} from '../../../types/place-card-type';
+import {RatingStars} from '../../../types/review-type';
 
 type PropertyReviewFormRatingProps = {
   ratingCallback: (name: string, value: RatingStars) => void;

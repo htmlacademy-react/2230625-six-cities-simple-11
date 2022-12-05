@@ -1,7 +1,7 @@
 import {PlaceCardList} from '../../types/place-card-type';
-import {LocationList} from '../../types/locationType';
+import {LocationList} from '../../types/location-type';
 import LocationContainer from '../../components/location-container/location-container';
-import PlacesContainer from '../../places-container/places-container';
+import PlacesContainer from '../../components/places-container/places-container';
 
 type MainScreenProps = {
   placeCardList: PlaceCardList;

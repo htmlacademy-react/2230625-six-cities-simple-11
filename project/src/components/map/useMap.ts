@@ -1,8 +1,8 @@
 import {useEffect, useState, useRef, MutableRefObject} from 'react';
-import {LocationType} from "../../types/locationType";
-import leaflet from "leaflet";
+import {LocationType} from '../../types/location-type';
+import leaflet from 'leaflet';
 
-function useMap(mapRef:  MutableRefObject<null>, city: LocationType) {
+function useMap(mapRef: MutableRefObject<null>, city: LocationType) {
   const [map, setMap] = useState<leaflet.Map | null>(null);
   const isRenderedRef = useRef(false);
 

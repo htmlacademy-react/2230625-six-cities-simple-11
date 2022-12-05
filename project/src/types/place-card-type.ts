@@ -1,17 +1,14 @@
-import {LocationType} from "./locationType";
+import {LocationType} from './location-type';
+import {RatingStars, Review} from './review-type';
 
 export enum PlaceType {
   Apartment = 'Apartment',
   Private = 'Private room'
 }
 
-export type RatingStars = 0|1|2|3|4|5
-
-export type Review = {
-  user?: string;
-  rating: RatingStars;
-  review: string;
-  time: string;
+export type UserType = {
+  avatar: string;
+  name: string;
 }
 
 export type Futures = {
@@ -31,7 +28,7 @@ export type Point = {
 }
 
 export type PlaceCardType = {
-  id: string;
+  id: number;
   image: string;
   price: Price;
   name: string;
@@ -40,7 +37,7 @@ export type PlaceCardType = {
   futures: Futures;
   isPremium?: boolean;
   inside: string[];
-  reviews?: Review[];
+  reviews: Review[];
   city: LocationType;
   point: Point;
 }

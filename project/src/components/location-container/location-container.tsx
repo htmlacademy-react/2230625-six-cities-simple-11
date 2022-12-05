@@ -1,5 +1,5 @@
 import Location from '../../components/location/location';
-import {LocationList} from '../../types/locationType';
+import {LocationList} from '../../types/location-type';
 
 type LocationContainerProps = {
   locationList: LocationList;

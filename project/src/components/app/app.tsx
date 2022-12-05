@@ -6,7 +6,7 @@ import PropertyPage from '../../pages/property-page/property-page';
 import LoginPage from '../../pages/login-page/login-page';
 import Header from '../header/header';
 import {PlaceCardList} from '../../types/place-card-type';
-import {LocationList} from '../../types/locationType';
+import {LocationList} from '../../types/location-type';
 
 
 type AppScreenProps = {

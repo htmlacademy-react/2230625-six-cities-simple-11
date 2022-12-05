@@ -1,11 +1,10 @@
 import {PropertyReviewFormRating} from './rating';
-
-import {Review} from '../../../types/place-card-type';
 import {FormEvent, useRef, useState} from 'react';
+import {Review} from '../../../types/review-type';
 
 export function PropertyReviewForm() {
   const inputRef = useRef(null);
-  const [review, setReview] = useState<Review>({rating: 0, review: '', time: new Date().toDateString()});
+  const [review, setReview] = useState<Review>({rating: 0, text: '', date: new Date()});
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (inputRef) {

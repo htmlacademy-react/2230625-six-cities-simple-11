@@ -11,10 +11,16 @@ import {PropertyHost} from '../../components/property/host';
 import {PropertyReviews} from '../../components/property/reviews';
 import {PropertyGallery} from '../../components/property/galery';
 import {PropertyNearPlaces} from '../../components/property/near-places';
+import Map from '../../components/map/map';
+import {Amsterdam} from '../../mocks/locations';
+import {useState} from 'react';
+import {PlaceCardType} from '../../types/place-card-type';
 
 function PropertyPage(): JSX.Element {
   const params = useParams();
-  const placeCard = placeCardList.find((item) => item.id === params.id);
+  const placeCard = placeCardList.find((item) => item.id.toString() === params.id);
+  const nearPlacesList = placeCardList.slice(1, 4);
+  const [activeNearPlace, setActive] = useState<PlaceCardType|undefined>();
 
   return (
     placeCard === undefined
@@ -31,13 +37,13 @@ function PropertyPage(): JSX.Element {
               <PropertyPrice price={placeCard.price} />
               <PropertyInside inside={placeCard.inside} />
               <PropertyHost />
-              <PropertyReviews />
+              <PropertyReviews reviewList={placeCard.reviews} />
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map className="property__map" city={Amsterdam} placeCardList={nearPlacesList} selectedPlaceCard={activeNearPlace} />
         </section>
         <div className="container">
-          <PropertyNearPlaces />
+          <PropertyNearPlaces nearPlacesList={nearPlacesList} setActiveNearPlaceCallback={setActive}/>
         </div>
       </main>
   );
