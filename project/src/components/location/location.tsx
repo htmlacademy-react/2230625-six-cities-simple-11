@@ -1,4 +1,4 @@
-import {LocationType} from '../../types/locationType';
+import {LocationType} from '../../types/location-type';
 
 type LocationProps = {
   location: LocationType;

@@ -16,7 +16,7 @@ function PlaceCard({placeCard, onMouseEnterCallback}: PlaceCardProps) : JSX.Elem
         </div>
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`${AppRoute.Room}/${placeCard.id}`}>
+        <Link to={`${AppRoute.Room}/${placeCard.id}`} preventScrollReset >
           <img className="place-card__image" src={placeCard.image} width="260" height="200" alt="Place card"/>
         </Link>
       </div>
@@ -34,7 +34,7 @@ function PlaceCard({placeCard, onMouseEnterCallback}: PlaceCardProps) : JSX.Elem
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/#">{placeCard.name}</a>
+          <Link to={`${AppRoute.Room}/${placeCard.id}`} preventScrollReset>{placeCard.name}</Link>
         </h2>
         <p className="place-card__type">{placeCard.futures.entire}</p>
       </div>

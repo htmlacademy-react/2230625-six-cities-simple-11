@@ -1,18 +1,20 @@
 import React, {useEffect, useRef} from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from "../../const";
-import useMap from "./useMap";
-import {LocationType} from "../../types/locationType";
-import {PlaceCardType, Point} from "../../types/place-card-type";
+import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
+import useMap from './useMap';
+import {LocationType} from '../../types/location-type';
+import {PlaceCardType} from '../../types/place-card-type';
+import cn from 'classnames';
 
 type mapProps = {
   city: LocationType;
   placeCardList: PlaceCardType[];
-  selectedPlaceCard: PlaceCardType
+  selectedPlaceCard?: PlaceCardType;
+  className: string;
 }
 
-function Map({city, placeCardList, selectedPlaceCard} : mapProps) {
+function Map({city, placeCardList, selectedPlaceCard, className} : mapProps) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -36,7 +38,7 @@ function Map({city, placeCardList, selectedPlaceCard} : mapProps) {
             lat: placeCard.point.lat,
             lng: placeCard.point.lng,
           }, {
-            icon: (placeCard.id === selectedPlaceCard.id)
+            icon: (placeCard.id === selectedPlaceCard?.id)
               ? currentCustomIcon
               : defaultCustomIcon,
           })
@@ -47,9 +49,7 @@ function Map({city, placeCardList, selectedPlaceCard} : mapProps) {
 
 
   return (
-    <section className="cities__map map"
-      ref={mapRef}
-    ></section>
+    <section className={cn(className, 'map')} ref={mapRef}></section>
   );
 }
 

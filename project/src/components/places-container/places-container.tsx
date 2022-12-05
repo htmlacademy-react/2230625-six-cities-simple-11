@@ -1,8 +1,8 @@
-import {PlaceCardList, PlaceCardType} from '../types/place-card-type';
-import PlaceCard from '../components/place-card/place-card';
+import {PlaceCardList, PlaceCardType} from '../../types/place-card-type';
 import {useState} from 'react';
-import Map from "../components/map/map";
-import {Amsterdam} from "../mocks/locations";
+import Map from '../map/map';
+import {Amsterdam} from '../../mocks/locations';
+import PlaceList from '../places-list/places-list';
 
 type PlacesContainerProps = {
   placeCardList: PlaceCardList;
@@ -16,7 +16,7 @@ function PlacesContainer({placeCardList} : PlacesContainerProps) {
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">312 places to stay in Amsterdam</b>
-        <form className="places__sorting" action="/#" method="get">
+        <form className="places__sorting" action="/project/src/pages#" method="get">
           <span className="places__sorting-caption">Sort by</span>
           <span className="places__sorting-type" tabIndex={0}>
                   Popular
@@ -31,12 +31,10 @@ function PlacesContainer({placeCardList} : PlacesContainerProps) {
             <li className="places__option" tabIndex={0}>Top rated first</li>
           </ul>
         </form>
-        <div className="cities__places-list places__list tabs__content">
-          {placeCardList.map((item) => <PlaceCard placeCard={item} onMouseEnterCallback={() => setActive(item)}/>)}
-        </div>
+        <PlaceList className="cities__places-list" placeCardList={placeCardList} onMouseEnterCallback={setActive} />
       </section>
       <div className="cities__right-section">
-        <Map city={Amsterdam} placeCardList={placeCardList} selectedPlaceCard={active} />
+        <Map className="cities__map" city={Amsterdam} placeCardList={placeCardList} selectedPlaceCard={active} />
       </div>
     </div>
   );
