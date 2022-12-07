@@ -35,7 +35,7 @@ function PropertyPage(): JSX.Element {
             <PropertyReviews reviewList={placeCard.reviews} />
           </div>
         </div>
-        <Map className="property__map" city={Amsterdam} placeCardList={[...nearPlacesList, placeCard]} selectedPlaceCard={placeCard} />
+        <Map className="property__map" city={placeCard.city} placeCardList={[...nearPlacesList, placeCard]} selectedPlaceCard={placeCard} />
       </section>
       <div className="container">
         <PropertyNearPlaces nearPlacesList={nearPlacesList} />

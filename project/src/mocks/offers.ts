@@ -82,7 +82,7 @@ export const placeCardList: PlaceCardList = [
     },
     name: 'Nice, cozy, warm big bed apartment',
     ratingStars: 5,
-    ratingValue: 4.8,
+    ratingValue: 5,
     futures: {
       entire: PlaceType.Apartment,
       bedrooms: 3,

@@ -1,5 +1,6 @@
 import {PropertyReviewItem} from './rewiew';
-import {Review} from '../../../types/review-type';
+import {Review} from "../../../types/review-type";
+
 
 type PropertyReviewListProps = {
   reviewList: Review[];
