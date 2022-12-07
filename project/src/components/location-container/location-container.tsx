@@ -1,15 +1,11 @@
 import Location from '../../components/location/location';
-import {LocationList} from '../../types/location-type';
+import {locationList} from '../../mocks/locations';
 
-type LocationContainerProps = {
-  locationList: LocationList;
-}
-
-function LocationContainer({locationList} : LocationContainerProps) {
+function LocationContainer() {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {locationList.map((item) => <Location location={item}/>)}
+        {locationList.map((item) => <Location key={item.id} location={item}/>)}
       </ul>
     </section>
   );

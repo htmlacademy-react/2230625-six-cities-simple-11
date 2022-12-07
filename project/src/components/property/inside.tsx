@@ -6,7 +6,7 @@ export function PropertyInside({inside}: {inside: string[]}) {
         {
           inside.map((item) =>
             (
-              <li className="property__inside-item">
+              <li key={item} className="property__inside-item">
                 {item}
               </li>
             )

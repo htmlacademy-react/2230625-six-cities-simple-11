@@ -14,25 +14,26 @@ type mapProps = {
   className: string;
 }
 
+const defaultCustomIcon = leaflet.icon({
+  iconUrl: URL_MARKER_DEFAULT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});
+
+const currentCustomIcon = leaflet.icon({
+  iconUrl: URL_MARKER_CURRENT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});
+
 function Map({city, placeCardList, selectedPlaceCard, className} : mapProps) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
-  const defaultCustomIcon = leaflet.icon({
-    iconUrl: URL_MARKER_DEFAULT,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
-
-  const currentCustomIcon = leaflet.icon({
-    iconUrl: URL_MARKER_CURRENT,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
-
   useEffect(() => {
     if (map) {
-      placeCardList.forEach((placeCard) => {
+      map.panTo({lat: city.points.lat, lng:city.points.lng});
+      placeCardList?.forEach((placeCard) => {
         leaflet
           .marker({
             lat: placeCard.point.lat,
@@ -45,7 +46,7 @@ function Map({city, placeCardList, selectedPlaceCard, className} : mapProps) {
           .addTo(map);
       });
     }
-  }, [map, placeCardList, selectedPlaceCard]);
+  }, [map, placeCardList, selectedPlaceCard, city]);
 
 
   return (

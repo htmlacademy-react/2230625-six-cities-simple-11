@@ -96,27 +96,4 @@ export const placeCardList: PlaceCardList = [
     },
     reviews: reviewList,
   },
-  {
-    id: 4,
-    image: 'img/room.jpg',
-    price: {
-      value: 80,
-      text: 'night'
-    },
-    name: 'Wood and stone place',
-    ratingStars: 4,
-    ratingValue: 4.8,
-    futures: {
-      entire: PlaceType.Private,
-      bedrooms: 3,
-      adults: 4
-    },
-    isPremium: false,
-    inside: insidePlace,
-    city: Amsterdam,
-    point: {
-      lat: 52.3609553943508, lng: 4.85309666406198
-    },
-    reviews: reviewList,
-  },
 ];

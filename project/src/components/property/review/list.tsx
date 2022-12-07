@@ -10,7 +10,7 @@ export function PropertyReviewList({reviewList}: PropertyReviewListProps) {
     <ul className="reviews__list">
       {reviewList.map((item) =>
         (
-          <li className="reviews__item">
+          <li key={item.date.toString()} className="reviews__item">
             <PropertyReviewItem review={item} />
           </li>
         )

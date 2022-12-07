@@ -5,16 +5,8 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PropertyPage from '../../pages/property-page/property-page';
 import LoginPage from '../../pages/login-page/login-page';
 import Header from '../header/header';
-import {PlaceCardList} from '../../types/place-card-type';
-import {LocationList} from '../../types/location-type';
 
-
-type AppScreenProps = {
-  placeCardList: PlaceCardList;
-  locationList: LocationList;
-}
-
-function App({placeCardList, locationList}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -22,10 +14,7 @@ function App({placeCardList, locationList}: AppScreenProps): JSX.Element {
           <Route index
             path={AppRoute.Main}
             element={
-              <MainPage
-                placeCardList={placeCardList}
-                locationList={locationList}
-              />
+              <MainPage />
             }
           />
           <Route
