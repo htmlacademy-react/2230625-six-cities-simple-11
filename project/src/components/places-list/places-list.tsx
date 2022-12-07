@@ -10,7 +10,7 @@ type PlacesListProps= {
 function PlaceList({className, placeCardList, onMouseEnterCallback} : PlacesListProps) {
   return (
     <div className={cn(className, 'places__list', 'tabs__content')}>
-      {placeCardList.map((item) => <PlaceCard placeCard={item} onMouseEnterCallback={() => onMouseEnterCallback(item)}/>)}
+      {placeCardList.map((item) => <PlaceCard key={item.id} placeCard={item} onMouseEnterCallback={() => onMouseEnterCallback(item)}/>)}
     </div>
   );
 }
