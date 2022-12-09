@@ -5,6 +5,8 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PropertyPage from '../../pages/property-page/property-page';
 import LoginPage from '../../pages/login-page/login-page';
 import Header from '../header/header';
+import {useAppSelector} from "../../hooks";
+import {Spinner} from "../spinner/spinner";
 
 function App(): JSX.Element {
   return (

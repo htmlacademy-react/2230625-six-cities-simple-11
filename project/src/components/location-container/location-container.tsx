@@ -1,11 +1,11 @@
 import Location from '../../components/location/location';
-import {locationList} from '../../mocks/locations';
+const locationList = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf']
 
-function LocationContainer() {
+  function LocationContainer() {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {locationList.map((item) => <Location key={item.id} location={item}/>)}
+        {locationList.map((item) => <Location key={item} locationName={item}/>)}
       </ul>
     </section>
   );

@@ -1,8 +1,8 @@
-import {PlaceCardList} from '../../types/place-card-type';
+import {Places} from '../../types/place';
 import PlaceList from "../places-list/places-list";
 
 type PropertyNearPlacesProps = {
-  nearPlacesList: PlaceCardList;
+  nearPlacesList: Places;
 }
 
 export function PropertyNearPlaces({nearPlacesList} : PropertyNearPlacesProps) {

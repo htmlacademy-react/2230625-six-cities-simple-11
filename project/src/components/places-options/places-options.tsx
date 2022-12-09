@@ -1,4 +1,4 @@
-import {SortType, sortTypes} from "../../mocks/sortTypes";
+import {SortType, sortTypes} from "../../types/sortTypes";
 import cn from 'classnames';
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {setSort} from "../../store/actions";

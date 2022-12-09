@@ -1,16 +1,20 @@
-import {Futures} from '../../types/place-card-type';
+type PropertyFuturesProps = {
+  type: string;
+  bedrooms: number;
+  maxAdults: number;
+}
 
-export function PropertyFutures({futures}: {futures: Futures}) {
+export function PropertyFutures({type, bedrooms, maxAdults}: PropertyFuturesProps) {
   return (
     <ul className="property__features">
       <li className="property__feature property__feature--entire">
-        {futures.entire}
+        {type}
       </li>
       <li className="property__feature property__feature--bedrooms">
-        {`${futures.bedrooms} Bedrooms`}
+        {`${bedrooms} Bedrooms`}
       </li>
       <li className="property__feature property__feature--adults">
-        {`Max ${futures.adults} adults`}
+        {`Max ${maxAdults} adults`}
       </li>
     </ul>
   );
