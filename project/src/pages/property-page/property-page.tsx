@@ -1,5 +1,4 @@
 import {useParams} from 'react-router-dom';
-import {placeCardList} from '../../mocks/offers';
 import {PropertyMark} from '../../components/property/mark';
 import {PropertyName} from '../../components/property/name';
 import {PropertyRating} from '../../components/property/rating';
@@ -12,12 +11,13 @@ import {PropertyReviews} from '../../components/property/reviews';
 import {PropertyGallery} from '../../components/property/galery';
 import {PropertyNearPlaces} from '../../components/property/near-places';
 import Map from '../../components/map/map';
-import {Amsterdam} from '../../mocks/locations';
+import {useAppSelector} from "../../hooks";
 
 function PropertyPage(): JSX.Element {
   const params = useParams();
+  const placeCardList = useAppSelector((state) => state.places)
+
   const placeCard = placeCardList.find((item) => item.id.toString() === params.id);
-  const nearPlacesList = placeCardList.filter((item) => item !== placeCard).slice(0, 3);
 
   return (placeCard === undefined ? <NotFoundPage /> :
     <main className="page__main page__main--property">
@@ -26,19 +26,19 @@ function PropertyPage(): JSX.Element {
         <div className="property__container container">
           <div className="property__wrapper">
             {placeCard.isPremium && <PropertyMark mark={'Premium'} />}
-            <PropertyName name={placeCard.name} />
-            <PropertyRating ratingStars={placeCard.ratingStars} ratingValue={placeCard.ratingValue} />
-            <PropertyFutures futures={placeCard.futures} />
+            <PropertyName name={placeCard.title} />
+            <PropertyRating rating={placeCard.rating} />
+            <PropertyFutures type={placeCard.type} bedrooms={placeCard.bedrooms} maxAdults={placeCard.maxAdults} />
             <PropertyPrice price={placeCard.price} />
-            <PropertyInside inside={placeCard.inside} />
+            <PropertyInside inside={placeCard.goods} />
             <PropertyHost />
-            <PropertyReviews reviewList={placeCard.reviews} />
+            <PropertyReviews />
           </div>
         </div>
-        <Map className="property__map" city={placeCard.city} placeCardList={[...nearPlacesList, placeCard]} selectedPlaceCard={placeCard} />
+        <Map className="property__map" city={placeCard.city} placeCardList={[placeCard]} selectedPlaceCard={placeCard} />
       </section>
       <div className="container">
-        <PropertyNearPlaces nearPlacesList={nearPlacesList} />
+        <PropertyNearPlaces nearPlacesList={[]} />
       </div>
     </main>
   );

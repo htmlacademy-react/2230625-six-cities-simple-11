@@ -1,18 +1,17 @@
-import {LocationType} from '../../types/location-type';
 import {useAppDispatch} from '../../hooks';
 import {changeLocation} from '../../store/actions';
 
 type LocationProps = {
-  location: LocationType;
+  locationName: string;
 }
 
-function Location({location} : LocationProps) {
+function Location({locationName} : LocationProps) {
   const dispatch = useAppDispatch();
 
   return(
-    <li className="locations__item" onClick={() => dispatch(changeLocation(location))}>
-      <a className="locations__item-link tabs__item" href={location.href}>
-        <span>{location.name}</span>
+    <li className="locations__item" onClick={() => dispatch(changeLocation(locationName))}>
+      <a className="locations__item-link tabs__item" href={'#'}>
+        <span>{locationName}</span>
       </a>
     </li>
   );

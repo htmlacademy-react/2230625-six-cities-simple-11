@@ -1,12 +1,13 @@
 import PlaceCard from '../place-card/place-card';
-import {PlaceCardList, PlaceCardType} from '../../types/place-card-type';
+import {Places, Place} from '../../types/place';
 import cn from 'classnames';
 
 type PlacesListProps= {
   className: string;
-  placeCardList: PlaceCardList;
-  onMouseEnterCallback: (item: PlaceCardType) => void;
+  placeCardList: Places;
+  onMouseEnterCallback: (item: Place) => void;
 }
+
 function PlaceList({className, placeCardList, onMouseEnterCallback} : PlacesListProps) {
   return (
     <div className={cn(className, 'places__list', 'tabs__content')}>

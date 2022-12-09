@@ -1,6 +1,4 @@
-import {RatingStars} from './types/review-type';
-
-export const getRatingWidthPercent = (ratingStars: RatingStars) => `${100 * ratingStars / 5}%`;
+export const getRatingWidthPercent = (rating: number) => `${100 * rating / 5}%`;
 
 export const formatDate = (date: Date) => date.toLocaleDateString();
 

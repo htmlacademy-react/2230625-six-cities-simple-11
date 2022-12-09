@@ -1,19 +1,17 @@
-import {RatingStars} from '../../types/review-type';
 import {getRatingWidthPercent} from '../../utils';
 
 type PropertyRatingProps = {
-  ratingStars: RatingStars;
-  ratingValue: number;
+  rating: number;
 }
 
-export function PropertyRating({ratingStars, ratingValue}: PropertyRatingProps) {
+export function PropertyRating({rating}: PropertyRatingProps) {
   return (
     <div className="property__rating rating">
       <div className="property__stars rating__stars">
-        <span style={{ width: getRatingWidthPercent(ratingStars)}}></span>
+        <span style={{ width: getRatingWidthPercent(rating)}}></span>
         <span className="visually-hidden">Rating</span>
       </div>
-      <span className="property__rating-value rating__value">{ratingValue}</span>
+      <span className="property__rating-value rating__value">{rating}</span>
     </div>
   );
 }

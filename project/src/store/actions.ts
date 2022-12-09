@@ -1,7 +1,15 @@
 import {createAction} from '@reduxjs/toolkit';
-import {LocationType} from '../types/location-type';
-import {SortType} from "../mocks/sortTypes";
+import {City} from '../types/city';
+import {SortType} from "../types/sortTypes";
+import {Places} from "../types/place";
+import {AuthorizationStatus} from "../const";
 
-export const changeLocation = createAction<LocationType>('changeLocation');
-export const setSort = createAction<SortType>('setSort');
-export const fillPlaces = createAction('fillPlaces');
+export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+
+export const changeLocation = createAction<string>('user/changeLocation');
+
+export const setSort = createAction<SortType>('user/setSort');
+
+export const loadPlaces = createAction<Places>('data/loadPlaces');
+
+export const setPlacesDataLoadingStatus = createAction<boolean>('data/setPlacesDataLoadingStatus');

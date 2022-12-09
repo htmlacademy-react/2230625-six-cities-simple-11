@@ -3,14 +3,14 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
 import useMap from './useMap';
-import {LocationType} from '../../types/location-type';
-import {PlaceCardType} from '../../types/place-card-type';
+import {City} from '../../types/city';
+import {Place} from '../../types/place';
 import cn from 'classnames';
 
 type mapProps = {
-  city: LocationType;
-  placeCardList: PlaceCardType[];
-  selectedPlaceCard?: PlaceCardType;
+  city: City;
+  placeCardList: Place[];
+  selectedPlaceCard?: Place;
   className: string;
 }
 
@@ -32,12 +32,12 @@ function Map({city, placeCardList, selectedPlaceCard, className} : mapProps) {
 
   useEffect(() => {
     if (map) {
-      map.panTo({lat: city.points.lat, lng:city.points.lng});
+      map.panTo({lat: city.location.latitude, lng:city.location.longitude});
       placeCardList?.forEach((placeCard) => {
         leaflet
           .marker({
-            lat: placeCard.point.lat,
-            lng: placeCard.point.lng,
+            lat: placeCard.location.latitude,
+            lng: placeCard.location.longitude,
           }, {
             icon: (placeCard.id === selectedPlaceCard?.id)
               ? currentCustomIcon

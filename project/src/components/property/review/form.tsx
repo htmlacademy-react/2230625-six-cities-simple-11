@@ -1,16 +1,12 @@
 import {PropertyReviewFormRating} from './rating';
 import {FormEvent, useRef, useState} from 'react';
-import {Review} from '../../../types/review-type';
+import {Review} from '../../../types/review';
 
 export function PropertyReviewForm() {
   const inputRef = useRef(null);
-  const [review, setReview] = useState<Review>({rating: 0, text: '', date: new Date()});
+  const [review, setReview] = useState<Review>({rating: 0, comment: '', date: new Date().toLocaleDateString(), id: 0, user: {name: '', id: 0, avatarUrl: '', isPro: false}});
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (inputRef) {
-      // eslint-disable-next-line no-console
-      console.log(new FormData(inputRef?.current || undefined));
-    }
   };
 
   return (
