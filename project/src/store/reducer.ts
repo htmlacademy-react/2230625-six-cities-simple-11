@@ -1,8 +1,17 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeLocation, loadPlaces, requireAuthorization, setPlacesDataLoadingStatus, setSort} from './actions';
+import {
+  changeLocation,
+  getPlaceInfo, getReviews,
+  loadPlaces,
+  requireAuthorization,
+  setPlacesDataLoadingStatus,
+  setSort
+} from './actions';
 import {Popular, SortType} from "../types/sortTypes";
 import {AuthorizationStatus} from "../const";
-import {Places} from "../types/place";
+import {Place, Places} from "../types/place";
+import {User} from "../types/user";
+import {Review} from "../types/review";
 
 type InitialState = {
   sort: SortType,
@@ -10,6 +19,9 @@ type InitialState = {
   places: Places,
   isPlacesDataLoading: boolean,
   authorizationStatus: AuthorizationStatus,
+  authorizationUser?: User,
+  selectedHotel?: Place,
+  reviews: Review[]
 }
 
 const initialState: InitialState = {
@@ -18,6 +30,7 @@ const initialState: InitialState = {
   places: [],
   isPlacesDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
+  reviews: []
 };
 
 const reducer = createReducer(initialState, (builder) =>
@@ -36,6 +49,12 @@ const reducer = createReducer(initialState, (builder) =>
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(getPlaceInfo, (state, action) => {
+      state.selectedHotel = action.payload;
+    })
+    .addCase(getReviews, (state, action) => {
+      state.reviews = action.payload;
     })
 );
 

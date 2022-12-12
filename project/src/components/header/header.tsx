@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import {useAppSelector} from "../../hooks";
 import {HeaderNav} from "../header-nav/header-nav";
+
 
 function Header() : JSX.Element {
   return (
