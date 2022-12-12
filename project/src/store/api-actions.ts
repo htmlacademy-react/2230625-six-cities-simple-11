@@ -5,8 +5,10 @@ import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AuthorizationStatus} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import {loadPlaces, requireAuthorization, setPlacesDataLoadingStatus} from "./actions";
-import {Places} from "../types/place";
+import {getPlaceInfo, getReviews, loadPlaces, requireAuthorization, setPlacesDataLoadingStatus} from "./actions";
+import {Place, Places} from "../types/place";
+import {Review} from "../types/review";
+import {Comment} from "../types/comment";
 
 export const fetchHotelsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -22,6 +24,30 @@ export const fetchHotelsAction = createAsyncThunk<void, undefined, {
   },
 );
 
+export const fetchHotelAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchHotel',
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.get<Place>(`${APIRoute.Hotels}/${id}`);
+
+    dispatch(getPlaceInfo(data));
+  },
+);
+export const fetchReviewsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchReviews',
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.get<Review[]>(`${APIRoute.Comments}/${id}`);
+
+    dispatch(getReviews(data));
+  },
+);
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -48,6 +74,18 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+  },
+);
+
+
+export const commentAction = createAsyncThunk<void, {id: string, comment: Comment}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/comment',
+  async ({id, comment}, {dispatch, extra: api}) => {
+    const {data} = await api.post<Comment>(`${APIRoute.Comments}/${id}`, comment);
   },
 );
 

@@ -11,18 +11,28 @@ import {PropertyReviews} from '../../components/property/reviews';
 import {PropertyGallery} from '../../components/property/galery';
 import {PropertyNearPlaces} from '../../components/property/near-places';
 import Map from '../../components/map/map';
-import {useAppSelector} from "../../hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {useEffect} from "react";
+import {fetchHotelAction, fetchReviewsAction} from "../../store/api-actions";
 
 function PropertyPage(): JSX.Element {
   const params = useParams();
-  const placeCardList = useAppSelector((state) => state.places)
+  const dispatch = useAppDispatch();
+  const placeCard = useAppSelector((state) => state.selectedHotel);
+  const reviewList = useAppSelector((state) => state.reviews);
 
-  const placeCard = placeCardList.find((item) => item.id.toString() === params.id);
+  useEffect(() => {
+    if (params.id) {
+      dispatch(fetchHotelAction(params.id));
+      dispatch(fetchReviewsAction(params.id))
+    }
+  }, [params.id, reviewList.length])
+
 
   return (placeCard === undefined ? <NotFoundPage /> :
     <main className="page__main page__main--property">
       <section className="property">
-        <PropertyGallery />
+        <PropertyGallery gallery={placeCard.images} />
         <div className="property__container container">
           <div className="property__wrapper">
             {placeCard.isPremium && <PropertyMark mark={'Premium'} />}
@@ -31,8 +41,8 @@ function PropertyPage(): JSX.Element {
             <PropertyFutures type={placeCard.type} bedrooms={placeCard.bedrooms} maxAdults={placeCard.maxAdults} />
             <PropertyPrice price={placeCard.price} />
             <PropertyInside inside={placeCard.goods} />
-            <PropertyHost />
-            <PropertyReviews />
+            <PropertyHost host={placeCard.host} description={placeCard.description} />
+            <PropertyReviews reviewList={reviewList}/>
           </div>
         </div>
         <Map className="property__map" city={placeCard.city} placeCardList={[placeCard]} selectedPlaceCard={placeCard} />
