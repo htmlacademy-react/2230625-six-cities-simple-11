@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import {Provider} from 'react-redux';
 import {store} from './store';
-import {checkAuthAction, fetchHotelsAction} from "./store/api-actions";
+import {checkAuthAction, fetchHotelsAction} from './store/api-actions';
 
 store.dispatch(fetchHotelsAction());
 store.dispatch(checkAuthAction());

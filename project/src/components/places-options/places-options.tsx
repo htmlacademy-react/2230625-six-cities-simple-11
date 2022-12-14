@@ -1,8 +1,8 @@
-import {SortType, sortTypes} from "../../types/sortTypes";
+import {SortType, sortTypes} from '../../types/sortTypes';
 import cn from 'classnames';
-import {useAppDispatch, useAppSelector} from "../../hooks";
-import {setSort} from "../../store/actions";
-import {useState} from "react";
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {setSort} from '../../store/actions';
+import {useState} from 'react';
 
 
 export function PlacesSorting() {
@@ -12,7 +12,7 @@ export function PlacesSorting() {
   const onSortClick = (item: SortType) => {
     dispatch(setSort(item));
     setOpen(false);
-  }
+  };
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
@@ -27,15 +27,15 @@ export function PlacesSorting() {
         </svg>
       </span>
       <ul
-        className={cn("places__options", "places__options--custom", {"places__options--opened": open})}
+        className={cn('places__options', 'places__options--custom', {'places__options--opened': open})}
         onMouseLeave={() => setOpen(false)}
       >
-        {sortTypes.map(item => (
+        {sortTypes.map((item) => (
           <li
             key={item.tabIndex}
             onClick={() => onSortClick(item)}
             tabIndex={item.tabIndex}
-            className={cn("places__option", {"places__option--active": item.tabIndex === sort.tabIndex})}
+            className={cn('places__option', {'places__option--active': item.tabIndex === sort.tabIndex})}
           >{item.text}
           </li>
         ))}

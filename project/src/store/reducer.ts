@@ -1,29 +1,30 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {
-  changeLocation,
+  changeLocation, getNearPlaces,
   getPlaceInfo, getReviews,
   loadPlaces, loginUser,
   requireAuthorization, setPlaceDataLoadingStatus,
   setPlacesDataLoadingStatus, setReviewsDataLoadingStatus,
   setSort
 } from './actions';
-import {Popular, SortType} from "../types/sortTypes";
-import {AuthorizationStatus} from "../const";
-import {Place, Places} from "../types/place";
-import {Review} from "../types/review";
-import {UserData} from "../types/user-data";
+import {Popular, SortType} from '../types/sortTypes';
+import {AuthorizationStatus} from '../const';
+import {Place, Places} from '../types/place';
+import {Review} from '../types/review';
+import {UserData} from '../types/user-data';
 
 type InitialState = {
-  sort: SortType,
-  locationName: string,
-  places: Places,
-  isPlaceDataLoading: boolean,
-  isPlacesDataLoading: boolean,
-  isReviewsDataLoading: boolean,
-  authorizationStatus: AuthorizationStatus,
-  authorizationUser?: UserData,
-  selectedHotel?: Place,
-  reviews: Review[]
+  sort: SortType;
+  locationName: string;
+  places: Places;
+  isPlaceDataLoading: boolean;
+  isPlacesDataLoading: boolean;
+  isReviewsDataLoading: boolean;
+  authorizationStatus: AuthorizationStatus;
+  authorizationUser?: UserData;
+  selectedHotel?: Place;
+  nearPlaces: Places;
+  reviews: Review[];
 }
 
 const initialState: InitialState = {
@@ -34,6 +35,7 @@ const initialState: InitialState = {
   isPlacesDataLoading: false,
   isReviewsDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
+  nearPlaces: [],
   reviews: []
 };
 
@@ -62,6 +64,9 @@ const reducer = createReducer(initialState, (builder) =>
     })
     .addCase(getPlaceInfo, (state, action) => {
       state.selectedHotel = action.payload;
+    })
+    .addCase(getNearPlaces, (state, action) => {
+      state.nearPlaces = action.payload;
     })
     .addCase(getReviews, (state, action) => {
       state.reviews = action.payload;

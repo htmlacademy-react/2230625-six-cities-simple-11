@@ -1,5 +1,5 @@
 import axios, {AxiosInstance} from 'axios';
-import {getToken} from "./token";
+import {getToken} from './token';
 
 const BACKEND_URL = 'https://11.react.pages.academy/six-cities-simple';
 const REQUEST_TIMEOUT = 5000;

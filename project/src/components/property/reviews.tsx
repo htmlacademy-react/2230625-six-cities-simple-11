@@ -1,8 +1,7 @@
 import {PropertyReviewList} from './review/list';
 import {PropertyReviewForm} from './review/form';
-import {useAppSelector} from "../../hooks";
-import {AuthorizationStatus} from "../../const";
-import {Spinner} from "../spinner/spinner";
+import {useAppSelector} from '../../hooks';
+import {AuthorizationStatus} from '../../const';
 
 export function PropertyReviews() {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);

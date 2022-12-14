@@ -1,4 +1,4 @@
-import './spinner.css'
+import './spinner.css';
 
 export function Spinner() {
   return (

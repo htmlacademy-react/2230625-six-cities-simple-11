@@ -1,21 +1,28 @@
-import {FormEvent, useRef} from "react";
-import {useAppDispatch, useAppSelector} from "../../hooks";
-import {Link, Navigate, useNavigate} from "react-router-dom";
-import {AuthData} from "../../types/auth-data";
-import {loginAction} from "../../store/api-actions";
-import {AppRoute, AuthorizationStatus} from "../../const";
+import {FormEvent, useEffect, useRef} from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {Link, useNavigate} from 'react-router-dom';
+import {AuthData} from '../../types/auth-data';
+import {loginAction} from '../../store/api-actions';
+import {AppRoute, AuthorizationStatus, locationList} from '../../const';
+import {changeLocation} from '../../store/actions';
 
 function LoginPage(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const locationName = locationList[Math.floor(Math.random() * (locationList.length))];
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   if (authorizationStatus === AuthorizationStatus.Auth) {
     navigate(AppRoute.Main);
   }
+
+  useEffect(() => {
+    dispatch(changeLocation(locationName));
+  });
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -31,6 +38,7 @@ function LoginPage(): JSX.Element {
       });
     }
   };
+
 
   return (
     <main className="page__main page__main--login">
@@ -70,7 +78,7 @@ function LoginPage(): JSX.Element {
         <section className="locations locations--login locations--current">
           <div className="locations__item">
             <Link to={AppRoute.Main} className="locations__item-link" >
-              <span>Paris</span>
+              <span>{locationName}</span>
             </Link>
           </div>
         </section>

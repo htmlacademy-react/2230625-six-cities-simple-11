@@ -1,7 +1,7 @@
-import {User} from "../../types/user";
+import {User} from '../../types/user';
 type PropertyHostProps = {
   host: User;
-  description: string
+  description: string;
 }
 
 export function PropertyHost({host, description}: PropertyHostProps) {

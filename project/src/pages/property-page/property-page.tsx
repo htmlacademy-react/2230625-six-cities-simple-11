@@ -11,10 +11,10 @@ import {PropertyReviews} from '../../components/property/reviews';
 import {PropertyGallery} from '../../components/property/galery';
 import {PropertyNearPlaces} from '../../components/property/near-places';
 import Map from '../../components/map/map';
-import {useAppDispatch, useAppSelector} from "../../hooks";
-import {useEffect} from "react";
-import {fetchHotelAction, fetchReviewsAction} from "../../store/api-actions";
-import {Spinner} from "../../components/spinner/spinner";
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useEffect} from 'react';
+import {fetchHotelAction, fetchNearPlaces, fetchReviewsAction} from '../../store/api-actions';
+import {Spinner} from '../../components/spinner/spinner';
 
 function PropertyPage(): JSX.Element {
   const params = useParams();
@@ -24,9 +24,12 @@ function PropertyPage(): JSX.Element {
     if (params.id) {
       dispatch(fetchHotelAction(params.id));
       dispatch(fetchReviewsAction(params.id));
-    }}, [params.id]
-  )
+      dispatch(fetchNearPlaces(params.id));
+    }}, [params.id, dispatch]
+  );
+
   const placeCard = useAppSelector((state) => state.selectedHotel);
+  const nearPlaces = useAppSelector((state) => state.nearPlaces).slice(0, 3);
   const isDataLoading = useAppSelector((state) => state.isPlaceDataLoading);
   if (isDataLoading) {
     return (
@@ -34,29 +37,30 @@ function PropertyPage(): JSX.Element {
     );
   }
 
-
   return (placeCard === undefined ? <NotFoundPage /> :
-    <main className="page__main page__main--property">
-      <section className="property">
-        <PropertyGallery gallery={placeCard.images} />
-        <div className="property__container container">
-          <div className="property__wrapper">
-            {placeCard.isPremium && <PropertyMark mark={'Premium'} />}
-            <PropertyName name={placeCard.title} />
-            <PropertyRating rating={placeCard.rating} />
-            <PropertyFutures type={placeCard.type} bedrooms={placeCard.bedrooms} maxAdults={placeCard.maxAdults} />
-            <PropertyPrice price={placeCard.price} />
-            <PropertyInside inside={placeCard.goods} />
-            <PropertyHost host={placeCard.host} description={placeCard.description} />
-            <PropertyReviews />
+    <div className="page">
+      <main className="page__main page__main--property">
+        <section className="property">
+          <PropertyGallery gallery={placeCard.images} />
+          <div className="property__container container">
+            <div className="property__wrapper">
+              {placeCard.isPremium && <PropertyMark mark={'Premium'} />}
+              <PropertyName name={placeCard.title} />
+              <PropertyRating rating={placeCard.rating} />
+              <PropertyFutures type={placeCard.type} bedrooms={placeCard.bedrooms} maxAdults={placeCard.maxAdults} />
+              <PropertyPrice price={placeCard.price} />
+              <PropertyInside inside={placeCard.goods} />
+              <PropertyHost host={placeCard.host} description={placeCard.description} />
+              <PropertyReviews />
+            </div>
           </div>
+          <Map className="property__map" city={placeCard.city} placeCardList={[...nearPlaces, placeCard]} selectedPlaceCard={placeCard} />
+        </section>
+        <div className="container">
+          <PropertyNearPlaces nearPlacesList={nearPlaces} />
         </div>
-        <Map className="property__map" city={placeCard.city} placeCardList={[placeCard]} selectedPlaceCard={placeCard} />
-      </section>
-      <div className="container">
-        <PropertyNearPlaces nearPlacesList={[]} />
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }
 

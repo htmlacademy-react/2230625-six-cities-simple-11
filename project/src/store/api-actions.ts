@@ -6,16 +6,17 @@ import {APIRoute, AuthorizationStatus} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {
+  getNearPlaces,
   getPlaceInfo,
   getReviews,
   loadPlaces,
   loginUser,
   requireAuthorization, setPlaceDataLoadingStatus,
   setPlacesDataLoadingStatus, setReviewsDataLoadingStatus
-} from "./actions";
-import {Place, Places} from "../types/place";
-import {Review} from "../types/review";
-import {Comment} from "../types/comment";
+} from './actions';
+import {Place, Places} from '../types/place';
+import {Review} from '../types/review';
+import {Comment} from '../types/comment';
 
 export const fetchHotelsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -44,6 +45,18 @@ export const fetchHotelAction = createAsyncThunk<void, string, {
     dispatch(setPlaceDataLoadingStatus(false));
   },
 );
+export const fetchNearPlaces = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchReviews',
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.get<Places>(`${APIRoute.Hotels}/${id}/nearby`);
+    dispatch(getNearPlaces(data));
+  },
+);
+
 export const fetchReviewsAction = createAsyncThunk<void, string, {
   dispatch: AppDispatch;
   state: State;
@@ -57,6 +70,7 @@ export const fetchReviewsAction = createAsyncThunk<void, string, {
     dispatch(setReviewsDataLoadingStatus(false));
   },
 );
+
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -87,7 +101,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   },
 );
 
-export const commentAction = createAsyncThunk<void, {id: string, comment: Comment}, {
+export const commentAction = createAsyncThunk<void, {id: string; comment: Comment}, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;

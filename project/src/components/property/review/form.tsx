@@ -1,9 +1,9 @@
 import {PropertyReviewFormRating} from './rating';
 import {FormEvent, useState} from 'react';
-import {useParams} from "react-router-dom";
-import {commentAction} from "../../../store/api-actions";
-import {Comment} from "../../../types/comment";
-import {useAppDispatch} from "../../../hooks";
+import {useParams} from 'react-router-dom';
+import {commentAction} from '../../../store/api-actions';
+import {Comment} from '../../../types/comment';
+import {useAppDispatch} from '../../../hooks';
 
 export function PropertyReviewForm() {
   const params = useParams();
@@ -12,7 +12,7 @@ export function PropertyReviewForm() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (params.id && review.rating != 0) {
+    if (params.id && review.rating !== 0) {
       dispatch(commentAction({id: params.id, comment: review}));
       setReview({rating: 0, comment: ''});
     }
