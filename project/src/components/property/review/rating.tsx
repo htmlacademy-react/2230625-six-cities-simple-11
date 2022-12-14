@@ -1,18 +1,26 @@
+import {starsList} from "../../../const";
+
 type PropertyReviewFormRatingProps = {
+  rating: number;
   ratingCallback: (name: string, value: string) => void;
 }
 
-export function PropertyReviewFormRating({ratingCallback}: PropertyReviewFormRatingProps) {
-  const ratingList: number[] = [5, 4, 3, 2, 1];
+export function PropertyReviewFormRating({rating, ratingCallback}: PropertyReviewFormRatingProps) {
+  const onChangeHandler = ({target: {name, value}}: {target: {name: string, value: string}}) => {
+    ratingCallback(name, value);
+  }
+
   return (
     <div className="reviews__rating-form form__rating">
       {
-        ratingList.map((item) => (
+        starsList.map((item, index) => (
           <>
-            <input className="form__rating-input visually-hidden" name="rating" value={item} id={`${item}-stars`} type="radio"
-              onChange={({target: {name, value}}) => {ratingCallback(name, value);}}
+            <input
+              className="form__rating-input visually-hidden" name="rating" value={item.value} id={item.id} type="radio"
+              onChange={onChangeHandler}
+              checked={item.value.toString() === rating.toString()}
             />
-            <label htmlFor={`${item}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
+            <label htmlFor={item.id} className="reviews__rating-label form__rating-label" title={item.title}>
               <svg className="form__star-image" width="37" height="33">
                 <use xlinkHref="#icon-star"></use>
               </svg>

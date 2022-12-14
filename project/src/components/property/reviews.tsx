@@ -1,19 +1,15 @@
 import {PropertyReviewList} from './review/list';
 import {PropertyReviewForm} from './review/form';
-import {Review} from '../../types/review';
 import {useAppSelector} from "../../hooks";
 import {AuthorizationStatus} from "../../const";
+import {Spinner} from "../spinner/spinner";
 
-type PropertyReviewsProps = {
-  reviewList: Review[];
-}
-
-export function PropertyReviews({reviewList}: PropertyReviewsProps) {
+export function PropertyReviews() {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewList.length}</span></h2>
-      <PropertyReviewList reviewList={reviewList}/>
+      <PropertyReviewList />
       {authorizationStatus === AuthorizationStatus.Auth && <PropertyReviewForm />}
     </section>
   );

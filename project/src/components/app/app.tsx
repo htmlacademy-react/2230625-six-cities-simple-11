@@ -13,9 +13,7 @@ function App(): JSX.Element {
         <Route element={<Header />}>
           <Route index
             path={AppRoute.Main}
-            element={
-              <MainPage />
-            }
+            element={<MainPage />}
           />
           <Route
             path={`${AppRoute.Room}/:id`}
