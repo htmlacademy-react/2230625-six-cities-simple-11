@@ -1,4 +1,4 @@
-import {starsList} from "../../../const";
+import {starsList} from '../../../const';
 
 type PropertyReviewFormRatingProps = {
   rating: number;
@@ -6,9 +6,9 @@ type PropertyReviewFormRatingProps = {
 }
 
 export function PropertyReviewFormRating({rating, ratingCallback}: PropertyReviewFormRatingProps) {
-  const onChangeHandler = ({target: {name, value}}: {target: {name: string, value: string}}) => {
+  const onChangeHandler = ({target: {name, value}}: {target: {name: string; value: string}}) => {
     ratingCallback(name, value);
-  }
+  };
 
   return (
     <div className="reviews__rating-form form__rating">

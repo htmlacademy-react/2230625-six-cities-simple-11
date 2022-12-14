@@ -1,11 +1,11 @@
 import {Place} from '../../types/place';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import {getRatingWidthPercent} from "../../utils";
+import {getRatingWidthPercent} from '../../utils';
 
 type PlaceCardProps = {
   placeCard: Place;
-  onMouseEnterCallback: () => void;
+  onMouseEnterCallback?: () => void;
 }
 
 function PlaceCard({placeCard, onMouseEnterCallback}: PlaceCardProps) : JSX.Element {

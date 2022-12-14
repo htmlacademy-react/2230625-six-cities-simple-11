@@ -1,6 +1,6 @@
 import {PropertyReviewItem} from './rewiew';
-import {useAppSelector} from "../../../hooks";
-import {Spinner} from "../../spinner/spinner";
+import {useAppSelector} from '../../../hooks';
+import {Spinner} from '../../spinner/spinner';
 
 const compareDateStrings = (date1: string, date2: string) => new Date(date2).getTime() - new Date(date1).getTime();
 
@@ -19,10 +19,10 @@ export function PropertyReviewList() {
 
   return (
     <>
-    <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewList.length}</span></h2>
-    <ul className="reviews__list">
-      {filteredReviewList.map((item) => <PropertyReviewItem key={item.id} review={item} />)}
-    </ul>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewList.length}</span></h2>
+      <ul className="reviews__list">
+        {filteredReviewList.map((item) => <PropertyReviewItem key={item.id} review={item} />)}
+      </ul>
     </>
   );
 }

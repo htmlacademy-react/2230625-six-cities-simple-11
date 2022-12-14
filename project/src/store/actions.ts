@@ -1,9 +1,9 @@
 import {createAction} from '@reduxjs/toolkit';
-import {SortType} from "../types/sortTypes";
-import {Place, Places} from "../types/place";
-import {AuthorizationStatus} from "../const";
-import {Review} from "../types/review";
-import {UserData} from "../types/user-data";
+import {SortType} from '../types/sortTypes';
+import {Place, Places} from '../types/place';
+import {AuthorizationStatus} from '../const';
+import {Review} from '../types/review';
+import {UserData} from '../types/user-data';
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
@@ -15,9 +15,11 @@ export const setSort = createAction<SortType>('places/setSort');
 
 export const loadPlaces = createAction<Places>('data/loadPlaces');
 
-export const getPlaceInfo = createAction<Place>('data/getPlaceInfo')
+export const getPlaceInfo = createAction<Place>('data/getPlaceInfo');
 
-export const getReviews = createAction<Review[]>('data/getReviews')
+export const getNearPlaces = createAction<Places>('data/getNearPlaces');
+
+export const getReviews = createAction<Review[]>('data/getReviews');
 
 export const setPlacesDataLoadingStatus = createAction<boolean>('data/setPlacesDataLoadingStatus');
 
