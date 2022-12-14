@@ -1,9 +1,12 @@
-import {useAppSelector} from "../../hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 import {AppRoute, AuthorizationStatus} from "../../const";
 import {Link} from "react-router-dom";
+import {logoutAction} from "../../store/api-actions";
 
 export function HeaderNav() {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationUser = useAppSelector((state) => state.authorizationUser);
+  const dispatch = useAppDispatch();
 
   return (
     <nav className="header__nav">
@@ -12,7 +15,7 @@ export function HeaderNav() {
           {authorizationStatus === AuthorizationStatus.Auth
             ? <div className="header__nav-profile">
               <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-              <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+              <span className="header__user-name user__name">{authorizationUser?.email}</span>
             </div>
             : <Link to={AppRoute.Login} className="header__nav-link header__nav-link--profile" >
               <div className="header__avatar-wrapper user__avatar-wrapper"></div>
@@ -21,7 +24,7 @@ export function HeaderNav() {
           }
         </li>
         {authorizationStatus === AuthorizationStatus.Auth &&
-          <li className="header__nav-item">
+          <li className="header__nav-item" onClick={() => dispatch(logoutAction())}>
             <a className="header__nav-link" href="/#">
               <span className="header__signout">Sign out</span>
             </a>

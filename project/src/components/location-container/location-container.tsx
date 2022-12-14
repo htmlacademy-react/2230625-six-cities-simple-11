@@ -1,13 +1,30 @@
 import Location from '../../components/location/location';
-const locationList = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf']
+import {locationList} from "../../const";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {changeLocation} from "../../store/actions";
 
-  function LocationContainer() {
+function LocationContainer() {
+  const activeLocation = useAppSelector((state) => state.locationName);
+  const dispatch = useAppDispatch();
+
+  const setActiveLocationCallback = (locationName: string) => {
+    dispatch(changeLocation(locationName));
+  }
+
   return (
-    <section className="locations container">
-      <ul className="locations__list tabs__list">
-        {locationList.map((item) => <Location key={item} locationName={item}/>)}
-      </ul>
-    </section>
+    <div className="tabs">
+      <section className="locations container">
+        <ul className="locations__list tabs__list">
+          {locationList.map((item) =>
+            <Location
+              isActive={item===activeLocation}
+              key={item}
+              locationName={item}
+              setActiveLocationCallback={()=>{setActiveLocationCallback(item)}}/>
+          )}
+        </ul>
+      </section>
+    </div>
   );
 }
 

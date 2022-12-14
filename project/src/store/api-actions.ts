@@ -5,7 +5,14 @@ import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AuthorizationStatus} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import {getPlaceInfo, getReviews, loadPlaces, requireAuthorization, setPlacesDataLoadingStatus} from "./actions";
+import {
+  getPlaceInfo,
+  getReviews,
+  loadPlaces,
+  loginUser,
+  requireAuthorization, setPlaceDataLoadingStatus,
+  setPlacesDataLoadingStatus, setReviewsDataLoadingStatus
+} from "./actions";
 import {Place, Places} from "../types/place";
 import {Review} from "../types/review";
 import {Comment} from "../types/comment";
@@ -31,9 +38,10 @@ export const fetchHotelAction = createAsyncThunk<void, string, {
 }>(
   'data/fetchHotel',
   async (id, {dispatch, extra: api}) => {
+    dispatch(setPlaceDataLoadingStatus(true));
     const {data} = await api.get<Place>(`${APIRoute.Hotels}/${id}`);
-
     dispatch(getPlaceInfo(data));
+    dispatch(setPlaceDataLoadingStatus(false));
   },
 );
 export const fetchReviewsAction = createAsyncThunk<void, string, {
@@ -43,9 +51,10 @@ export const fetchReviewsAction = createAsyncThunk<void, string, {
 }>(
   'data/fetchReviews',
   async (id, {dispatch, extra: api}) => {
+    dispatch(setReviewsDataLoadingStatus(true));
     const {data} = await api.get<Review[]>(`${APIRoute.Comments}/${id}`);
-
     dispatch(getReviews(data));
+    dispatch(setReviewsDataLoadingStatus(false));
   },
 );
 export const checkAuthAction = createAsyncThunk<void, undefined, {
@@ -71,12 +80,12 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 }>(
   'user/login',
   async ({login: email, password}, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
-    saveToken(token);
+    const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+    saveToken(data.token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(loginUser(data));
   },
 );
-
 
 export const commentAction = createAsyncThunk<void, {id: string, comment: Comment}, {
   dispatch: AppDispatch;
@@ -85,7 +94,10 @@ export const commentAction = createAsyncThunk<void, {id: string, comment: Commen
 }>(
   'user/comment',
   async ({id, comment}, {dispatch, extra: api}) => {
-    const {data} = await api.post<Comment>(`${APIRoute.Comments}/${id}`, comment);
+    const {data} = await api.post<Review[]>(`${APIRoute.Comments}/${id}`, comment);
+    dispatch(setReviewsDataLoadingStatus(true));
+    dispatch(getReviews(data));
+    dispatch(setReviewsDataLoadingStatus(false));
   },
 );
 

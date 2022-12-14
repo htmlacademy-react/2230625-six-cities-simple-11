@@ -1,5 +1,6 @@
-import { Outlet } from 'react-router-dom';
+import {Link, Outlet} from 'react-router-dom';
 import {HeaderNav} from "../header-nav/header-nav";
+import {AppRoute} from "../../const";
 
 
 function Header() : JSX.Element {
@@ -9,9 +10,9 @@ function Header() : JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link header__logo-link--active" href="/#">
+              <Link to={AppRoute.Main} className="header__logo-link header__logo-link--active">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
+              </Link>
             </div>
             <HeaderNav />
           </div>

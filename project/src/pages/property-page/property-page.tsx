@@ -14,19 +14,25 @@ import Map from '../../components/map/map';
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {useEffect} from "react";
 import {fetchHotelAction, fetchReviewsAction} from "../../store/api-actions";
+import {Spinner} from "../../components/spinner/spinner";
 
 function PropertyPage(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const placeCard = useAppSelector((state) => state.selectedHotel);
-  const reviewList = useAppSelector((state) => state.reviews);
 
   useEffect(() => {
     if (params.id) {
       dispatch(fetchHotelAction(params.id));
-      dispatch(fetchReviewsAction(params.id))
-    }
-  }, [params.id, reviewList.length])
+      dispatch(fetchReviewsAction(params.id));
+    }}, [params.id]
+  )
+  const placeCard = useAppSelector((state) => state.selectedHotel);
+  const isDataLoading = useAppSelector((state) => state.isPlaceDataLoading);
+  if (isDataLoading) {
+    return (
+      <Spinner />
+    );
+  }
 
 
   return (placeCard === undefined ? <NotFoundPage /> :
@@ -42,7 +48,7 @@ function PropertyPage(): JSX.Element {
             <PropertyPrice price={placeCard.price} />
             <PropertyInside inside={placeCard.goods} />
             <PropertyHost host={placeCard.host} description={placeCard.description} />
-            <PropertyReviews reviewList={reviewList}/>
+            <PropertyReviews />
           </div>
         </div>
         <Map className="property__map" city={placeCard.city} placeCardList={[placeCard]} selectedPlaceCard={placeCard} />

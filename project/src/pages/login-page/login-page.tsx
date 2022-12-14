@@ -1,16 +1,21 @@
 import {FormEvent, useRef} from "react";
-import {useAppDispatch} from "../../hooks";
-import {Link, useNavigate} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 import {AuthData} from "../../types/auth-data";
 import {loginAction} from "../../store/api-actions";
-import {AppRoute} from "../../const";
+import {AppRoute, AuthorizationStatus} from "../../const";
 
 function LoginPage(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    navigate(AppRoute.Main);
+  }
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));

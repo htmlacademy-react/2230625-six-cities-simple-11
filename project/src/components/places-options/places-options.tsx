@@ -32,6 +32,7 @@ export function PlacesSorting() {
       >
         {sortTypes.map(item => (
           <li
+            key={item.tabIndex}
             onClick={() => onSortClick(item)}
             tabIndex={item.tabIndex}
             className={cn("places__option", {"places__option--active": item.tabIndex === sort.tabIndex})}

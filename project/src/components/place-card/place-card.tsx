@@ -35,7 +35,7 @@ function PlaceCard({placeCard, onMouseEnterCallback}: PlaceCardProps) : JSX.Elem
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Room}/${placeCard.id}`} preventScrollReset>{placeCard.title}</Link>
+          <Link to={`${AppRoute.Room}/${placeCard.id}`}>{placeCard.title}</Link>
         </h2>
         <p className="place-card__type">{placeCard.type}</p>
       </div>

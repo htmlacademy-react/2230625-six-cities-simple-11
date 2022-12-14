@@ -1,16 +1,15 @@
-import {useAppDispatch} from '../../hooks';
-import {changeLocation} from '../../store/actions';
+import cn from 'classnames';
 
 type LocationProps = {
   locationName: string;
+  isActive: boolean;
+  setActiveLocationCallback: () => void;
 }
 
-function Location({locationName} : LocationProps) {
-  const dispatch = useAppDispatch();
-
+function Location({locationName, isActive, setActiveLocationCallback} : LocationProps) {
   return(
-    <li className="locations__item" onClick={() => dispatch(changeLocation(locationName))}>
-      <a className="locations__item-link tabs__item" href={'#'}>
+    <li className="locations__item" onClick={setActiveLocationCallback}>
+      <a className={cn("locations__item-link tabs__item", {"tabs__item--active": isActive})}>
         <span>{locationName}</span>
       </a>
     </li>
